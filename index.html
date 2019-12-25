@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="origin" name="referrer">
+    <meta name="viewport" content="width=device-width, initial-sclae=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <script>
+        var hands = ['rock', 'paper', 'scissors'];
+        let win = 0; // 0 = draw, 1 = win, 2 = lose
+
+        const playerSelection = 'rock';
+        const computerSelection = hands[computerPlay()];
+
+        function computerPlay() {
+            return hands[Math.floor(Math.random()*hands.length)];
+        }
+        function gameError() {
+            return console.log('Error in game.');
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            if (playerSelection == 'rock') {
+                switch (computerSelection) {
+                    case 'rock': win = 0;
+                    case 'paper': win = 2;
+                    case 'scissors': win = 1;
+                    default:
+                        gameError();
+                        break;
+                }
+            } else if (playerSelection == 'paper') {
+                switch (computerSelection) {
+                    case 'rock': win = 1;
+                    case 'paper': win = 0;
+                    case 'scissors': win = 2;
+                    default:
+                        gameError();
+                        break;
+                }
+            } else {
+                switch (computerSelection) {
+                    case 'rock': win = 2;
+                    case 'paper': win = 1;
+                    case 'scissors': win = 0;
+                    default:
+                        gameError();
+                        break;
+                }
+            }
+            switch(win){
+                case 0:
+                    console.log('You got a draw. Try again.');
+                    break;
+                case 1:
+                    console.log('You won! Congratz.');
+                    break;
+                case 2:
+                    console.log('You lost. Try again.');
+                    break;
+            }
+        }
+
+    </script>
+</body>
+</html>
