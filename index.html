@@ -8,57 +8,72 @@
 </head>
 <body>
     <script>
-        var hands = ['rock', 'paper', 'scissors'];
+        const hands = ['rock', 'paper', 'scissors'];
         let win = 0; // 0 = draw, 1 = win, 2 = lose
 
-        const playerSelection = 'rock';
-        const computerSelection = hands[computerPlay()];
+        let playerSelection = 'rock';
+        let computerSelection = computerPlay();
 
         function computerPlay() {
             return hands[Math.floor(Math.random()*hands.length)];
-        }
-        function gameError() {
-            return console.log('Error in game.');
         }
 
         function playRound(playerSelection, computerSelection) {
             if (playerSelection == 'rock') {
                 switch (computerSelection) {
-                    case 'rock': win = 0;
-                    case 'paper': win = 2;
-                    case 'scissors': win = 1;
+                    case 'rock':
+                        win = 0;
+                        break;
+                    case 'paper':
+                        win = 2;
+                        break;
+                    case 'scissors':
+                        win = 1;
+                        break;
                     default:
-                        gameError();
+                        return 'Error in game.';
                         break;
                 }
             } else if (playerSelection == 'paper') {
                 switch (computerSelection) {
-                    case 'rock': win = 1;
-                    case 'paper': win = 0;
-                    case 'scissors': win = 2;
+                    case 'rock':
+                        win = 1;
+                        break;
+                    case 'paper':
+                        win = 0;
+                        break;
+                    case 'scissors':
+                        win = 2;
+                        break;
                     default:
-                        gameError();
+                        return 'Error in game.';
                         break;
                 }
             } else {
                 switch (computerSelection) {
-                    case 'rock': win = 2;
-                    case 'paper': win = 1;
-                    case 'scissors': win = 0;
+                    case 'rock':
+                        win = 2;
+                        break;
+                    case 'paper':
+                        win = 1;
+                        break;
+                    case 'scissors':
+                        win = 0;
+                        break;
                     default:
-                        gameError();
+                        return 'Error in game.';
                         break;
                 }
             }
             switch(win){
                 case 0:
-                    console.log('You got a draw. Try again.');
+                    return 'You got a draw. Try again.';
                     break;
                 case 1:
-                    console.log('You won! Congratz.');
+                    return 'You won! Congratz.';
                     break;
                 case 2:
-                    console.log('You lost. Try again.');
+                    return 'You lost. Try again.';
                     break;
             }
         }
