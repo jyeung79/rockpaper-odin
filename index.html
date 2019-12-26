@@ -10,9 +10,10 @@
     <script>
         const hands = ['rock', 'paper', 'scissors'];
         let win = 0; // 0 = draw, 1 = win, 2 = lose
-
-        let playerSelection = 'rock';
-        let computerSelection = computerPlay();
+        let player = 'rock';
+        let computer = computerPlay();
+        let playerWins = 0;
+        let computerWins = 0;
 
         function computerPlay() {
             return hands[Math.floor(Math.random()*hands.length)];
@@ -26,9 +27,11 @@
                         break;
                     case 'paper':
                         win = 2;
+                        computerWins++;
                         break;
                     case 'scissors':
                         win = 1;
+                        playerWins++;
                         break;
                     default:
                         return 'Error in game.';
@@ -38,12 +41,14 @@
                 switch (computerSelection) {
                     case 'rock':
                         win = 1;
+                        playerWins++;
                         break;
                     case 'paper':
                         win = 0;
                         break;
                     case 'scissors':
                         win = 2;
+                        computerWins++;
                         break;
                     default:
                         return 'Error in game.';
@@ -53,9 +58,11 @@
                 switch (computerSelection) {
                     case 'rock':
                         win = 2;
+                        computerWins++;
                         break;
                     case 'paper':
                         win = 1;
+                        playerWins++;
                         break;
                     case 'scissors':
                         win = 0;
@@ -67,15 +74,45 @@
             }
             switch(win){
                 case 0:
-                    return 'You got a draw. Try again.';
+                    return 'You got a draw. Try again. You both picked ' + playerSelection + '.';
                     break;
                 case 1:
-                    return 'You won! Congratz.';
+                    return 'You won! Congratz. ' + playerSelection + ' beats ' + computerSelection + '.';
                     break;
                 case 2:
-                    return 'You lost. Try again.';
+                    return 'You lost. Try again. ' + playerSelection + ' loses to '+ computerSelection + '.';
                     break;
             }
+        }
+
+        function game() {
+            playerWins = 0;
+            computerWins = 0; 
+            let winner = 'player'; //default value is player
+
+            while (win == 0 || playerWins < 3 && computerWins < 3) {
+                computer = computerPlay();
+                let selectHand = prompt("Which hand do you pick?","rock");
+                player = selectHand.toLowerCase();
+                switch (player) {
+                    case 'rock':
+                    case 'paper':
+                    case 'scissors':
+                        console.log('You chosen ' + player + '.');
+                        break;
+                    default:
+                        console.log('There is an error. Rock will be chosen');
+                        player = 'rock';
+                        break;
+                }
+                console.log(playRound(player, computer));
+                console.log('Player wins: ' + playerWins);
+                console.log('Computer wins ' + computerWins);
+            }
+            if (computerWins > playerWins ) {
+                winner = "computer";
+            }
+            console.log('The winner is ' + winner + '!');
         }
 
     </script>
